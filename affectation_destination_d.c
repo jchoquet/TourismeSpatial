@@ -7,6 +7,7 @@
 #include "affectation_destination_d.h"
 #include "structure_d.h"
 #include "structure_c.h"
+#include "structure_contraintes.h"
 
 contraintes ** importer_contraintes();
 
@@ -54,22 +55,26 @@ void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere crois
   for (i=0; i<n; i++) { // Boucle sur le tableau de dataCliLibre
     
     /* Recuperation des destinations dans un tableau */
-    destins[0] = getDes1(&dataTotal[i]);
-    destins[1] = getDes2(&dataTotal[i]);
-    destins[2] = getDes3(&dataTotal[i]);
-    destins[3] = getDes4(&dataTotal[i]);
-    destins[4] = getDes5(&dataTotal[i]);
-    destins[5] = getDes6(&dataTotal[i]);
+    destins[0] = getDes1_dataCliLibre(&dataTotal[i]);
+    destins[1] = getDes2_dataCliLibre(&dataTotal[i]);
+    destins[2] = getDes3_dataCliLibre(&dataTotal[i]);
+    destins[3] = getDes4_dataCliLibre(&dataTotal[i]);
+    destins[4] = getDes5_dataCliLibre(&dataTotal[i]);
+    destins[5] = getDes6_dataCliLibre(&dataTotal[i]);
     
     
     for (j=0; j<nbContBi; j++) { // Boucle sur les contraintes
-      if (destins[contBi[j][0].zone] == contBi[j][0].nom && destins[contBi[j][1].zone] != contBi[j][1].nom) {
+      char * nomCont1 = getNom(contBi[j][0]);
+      char * nomCont2 = getNom(contBi[j][1]);
+      int zoneCont1 = getZone(contBi[j][0]);
+      int zoneCont2 = getZone(contBi[j][1]);
+      if (destins[zoneCont1] == nomCont1 && destins[zoneCont2] != nomCont2) {
 	/* La contrainte n'est pas respectee */
-	destins[contBi[j][0].zone] = NULL;
+	destins[zoneCont1] = NULL;
       }
-      else if (destins[contBi[j][1].zone] == contBi[j][1].nom && destins[contBi[j][0].zone] != contBi[j][0].nom) {
+      else if (destins[zoneCont2] == nomCont2 && destins[zoneCont1] != nomCont1) {
 	/* La contrainte n'est pas respectee */
-	destins[contBi[j][1].zone] = NULL;
+	destins[zoneCont2] = NULL;
       }
     }
     
@@ -85,18 +90,22 @@ void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere crois
   for (i=0; i<n; i++) { // Boucle sur le tableau de dataCliLibre
     
     /* Recuperation des destinations dans un tableau */
-    destins[0] = getDes1(&dataTotal[i]);
-    destins[1] = getDes2(&dataTotal[i]);
-    destins[2] = getDes3(&dataTotal[i]);
-    destins[3] = getDes4(&dataTotal[i]);
-    destins[4] = getDes5(&dataTotal[i]);
-    destins[5] = getDes6(&dataTotal[i]);
+    destins[0] = getDes1_dataCliLibre(&dataTotal[i]);
+    destins[1] = getDes2_dataCliLibre(&dataTotal[i]);
+    destins[2] = getDes3_dataCliLibre(&dataTotal[i]);
+    destins[3] = getDes4_dataCliLibre(&dataTotal[i]);
+    destins[4] = getDes5_dataCliLibre(&dataTotal[i]);
+    destins[5] = getDes6_dataCliLibre(&dataTotal[i]);
     
     
     for (j=0; j<nbContUni; j++) {
-      if (destins[contUni[j][1].zone] == contUni[j][1].nom && destins[contUni[j][0].zone] != contUni[j][0].nom) {
+      char * nomCont1 = getNom(contBi[j][0]);
+      char * nomCont2 = getNom(contBi[j][1]);
+      int zoneCont1 = getZone(contBi[j][0]);
+      int zoneCont2 = getZone(contBi[j][1]);
+      if (destins[zoneCont2] == nomCont2 && destins[zoneCont1] != nomCont1) {
 	/* La contrainte n'est pas respectee */
-	destins[contUni[j][0].zone] = contUni[j][0].nom;
+	destins[zoneCont1] = nomCont1;
       }
     }
     
@@ -150,14 +159,14 @@ int main(int argc, char ** argv) {
   int n = 150; /* Nb touristes */
   dataCliLibre* dataTotal = calloc(n,sizeof(dataCliLibre));
   dataTotal[0] = *creer_dataCliLibre();
-  setNom(&dataTotal[0], nom);
+  setNom_dataCliLibre(&dataTotal[0], nom);
 
   
-  printf("Le nom est %s\n", getNom(&dataTotal[0]));
+  printf("Le nom est %s\n", getNom_dataCliLibre(&dataTotal[0]));
 
   char * nom2 = argv[2];
-  setNom(&dataTotal[0], nom2);
-  printf("Le nom est %s\n", getNom(&dataTotal[0]));
+  setNom_dataCliLibre(&dataTotal[0], nom2);
+  printf("Le nom est %s\n", getNom_dataCliLibre(&dataTotal[0]));
   
   
   free(dataTotal);

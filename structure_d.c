@@ -33,7 +33,7 @@ dataCliLibre* creer_dataCliLibre() {
    @ assigns : *d
    @ ensures : remplace le champ nom dans *d par *nom
    @ */
-void setNom(dataCliLibre* d, char *nom){
+void setNom_dataCliLibre(dataCliLibre* d, char *nom){
   d->nom = nom;
 }
 
@@ -41,7 +41,7 @@ void setNom(dataCliLibre* d, char *nom){
    @ assigns : *d
    @ ensures : renvoie l'element contenu dans nom
    @ */
-char* getNom(struct dataCliLibre* d) {
+char* getNom_dataCliLibre(struct dataCliLibre* d) {
   return d->nom;
 }
 
@@ -50,7 +50,7 @@ char* getNom(struct dataCliLibre* d) {
    @ assigns : *d
    @ ensures : remplace le champ prenom dans *d par *prenom
    @ */
-void setPrenom(dataCliLibre* d, char *prenom){
+void setPrenom_dataCliLibre(dataCliLibre* d, char *prenom){
   d->prenom = prenom;
 }
 
@@ -59,7 +59,7 @@ void setPrenom(dataCliLibre* d, char *prenom){
    @ assigns : *d
    @ ensures : renvoie l'element contenu dans prenom
    @ */
-char* getPrenom(struct dataCliLibre* d) {
+char* getPrenom_dataCliLibre(struct dataCliLibre* d) {
   return d->prenom;
 }
 
@@ -68,7 +68,7 @@ char* getPrenom(struct dataCliLibre* d) {
    @ assigns : *d
    @ ensures : remplace le champ des1 dans *d par *des1
    @ */
-void setDes1(dataCliLibre* d, char *des1){
+void setDes1_dataCliLibre(dataCliLibre* d, char *des1){
   d->des1 = des1;
 }
 
@@ -77,7 +77,7 @@ void setDes1(dataCliLibre* d, char *des1){
    @ assigns : *d
    @ ensures : renvoie l'element contenu dans des1
    @ */
-char* getDes1(struct dataCliLibre* d) {
+char* getDes1_dataCliLibre(struct dataCliLibre* d) {
   return d->des1;
 }
 
@@ -86,7 +86,7 @@ char* getDes1(struct dataCliLibre* d) {
    @ assigns : *d
    @ ensures : remplace le champ des2 dans *d par *des2
    @ */
-void setDes2(dataCliLibre* d, char *des2){
+void setDes2_dataCliLibre(dataCliLibre* d, char *des2){
   d->des2 = des2;
 }
 
@@ -95,7 +95,7 @@ void setDes2(dataCliLibre* d, char *des2){
    @ assigns : *d
    @ ensures : renvoie l'element contenu dans des2
    @ */
-char* getDes2(struct dataCliLibre* d) {
+char* getDes2_dataCliLibre(struct dataCliLibre* d) {
   return d->des2;
 }
 
@@ -104,7 +104,7 @@ char* getDes2(struct dataCliLibre* d) {
    @ assigns : *d
    @ ensures : remplace le champ des3 dans *d par *des3
    @ */
-void setDes3(dataCliLibre* d, char *des3){
+void setDes3_dataCliLibre(dataCliLibre* d, char *des3){
   d->des3 = des3;
 }
 
@@ -113,7 +113,7 @@ void setDes3(dataCliLibre* d, char *des3){
    @ assigns : *d
    @ ensures : renvoie l'element contenu dans des3
    @ */
-char* getDes3(struct dataCliLibre* d) {
+char* getDes3_dataCliLibre(struct dataCliLibre* d) {
   return d->des3;
 }
 
@@ -122,7 +122,7 @@ char* getDes3(struct dataCliLibre* d) {
    @ assigns : *d
    @ ensures : remplace le champ des4 dans *d par *des4
    @ */
-void setDes4(dataCliLibre* d, char *des4){
+void setDes4_dataCliLibre(dataCliLibre* d, char *des4){
   d->des4 = des4;
 }
 
@@ -131,7 +131,7 @@ void setDes4(dataCliLibre* d, char *des4){
    @ assigns : *d
    @ ensures : renvoie l'element contenu dans des4
    @ */
-char* getDes4(struct dataCliLibre* d) {
+char* getDes4_dataCliLibre(struct dataCliLibre* d) {
   return d->des4;
 }
 
@@ -140,7 +140,7 @@ char* getDes4(struct dataCliLibre* d) {
    @ assigns : *d
    @ ensures : remplace le champ des5 dans *d par *des5
    @ */
-void setDes5(dataCliLibre* d, char *des5){
+void setDes5_dataCliLibre(dataCliLibre* d, char *des5){
   d->des5 = des5;
 }
 
@@ -149,7 +149,7 @@ void setDes5(dataCliLibre* d, char *des5){
    @ assigns : *d
    @ ensures : renvoie l'element contenu dans des5
    @ */
-char* getDes5(struct dataCliLibre* d) {
+char* getDes5_dataCliLibre(struct dataCliLibre* d) {
   return d->des5;
 }
 
@@ -158,7 +158,7 @@ char* getDes5(struct dataCliLibre* d) {
    @ assigns : *d
    @ ensures : remplace le champ des6 dans *d par *des6
    @ */
-void setDes6(dataCliLibre* d, char *des6){
+void setDes6_dataCliLibre(dataCliLibre* d, char *des6){
   d->des6 = des6;
 }
 
@@ -167,7 +167,7 @@ void setDes6(dataCliLibre* d, char *des6){
    @ assigns : *d
    @ ensures : renvoie l'element contenu dans des6
    @ */
-char* getDes6(struct dataCliLibre* d) {
+char* getDes6_dataCliLibre(struct dataCliLibre* d) {
   return d->des6;
 }
 

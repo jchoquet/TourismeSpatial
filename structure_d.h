@@ -28,112 +28,112 @@ dataCliLibre* creer_dataCliLibre(void);
    @ assigns : *d
    @ ensures : remplace le champ nom dans *d par *nom
    @ */
-void setNom(dataCliLibre* d, char *nom);
+void setNom_dataCliLibre(dataCliLibre* d, char *nom);
 
 
 /* @ requires : *d est valide
    @ assigns : *d
    @ ensures : renvoie l'element contenu dans nom
    @ */
-char* getNom(dataCliLibre* d);
+char* getNom_dataCliLibre(dataCliLibre* d);
 
 
 /* @ requires : *d est valide
    @ assigns : *d
    @ ensures : remplace le champ prenom dans *d par *prenom
    @ */
-void setPrenom(dataCliLibre* d, char *prenom);
+void setPrenom_dataCliLibre(dataCliLibre* d, char *prenom);
 
 
 /* @ requires : *d est valide
    @ assigns : *d
    @ ensures : renvoie l'element contenu dans prenom
    @ */
-char* getPrenom(dataCliLibre* d);
+char* getPrenom_dataCliLibre(dataCliLibre* d);
 
 
 /* @ requires : *d est valide
    @ assigns : *d
    @ ensures : remplace le champ des1 dans *d par *des1
    @ */
-void setDes1(dataCliLibre* d, char *des1);
+void setDes1_dataCliLibre(dataCliLibre* d, char *des1);
 
 
 /* @ requires : *d est valide
    @ assigns : *d
    @ ensures : renvoie l'element contenu dans des1
    @ */
-char* getDes1(dataCliLibre* d);
+char* getDes1_dataCliLibre(dataCliLibre* d);
 
 
 /* @ requires : *d est valide
    @ assigns : *d
    @ ensures : remplace le champ des2 dans *d par *des2
    @ */
-void setDes2(dataCliLibre* d, char *des2);
+void setDes2_dataCliLibre(dataCliLibre* d, char *des2);
 
 
 /* @ requires : *d est valide
    @ assigns : *d
    @ ensures : renvoie l'element contenu dans des2
    @ */
-char* getDes2(dataCliLibre* d);
+char* getDes2_dataCliLibre(dataCliLibre* d);
 
 
 /* @ requires : *d est valide
    @ assigns : *d
    @ ensures : remplace le champ des3 dans *d par *des3
    @ */
-void setDes3(dataCliLibre* d, char *des3);
+void setDes3_dataCliLibre(dataCliLibre* d, char *des3);
 
 
 /* @ requires : *d est valide
    @ assigns : *d
    @ ensures : renvoie l'element contenu dans des3
    @ */
-char* getDes3(dataCliLibre* d);
+char* getDes3_dataCliLibre(dataCliLibre* d);
 
 
 /* @ requires : *d est valide
    @ assigns : *d
    @ ensures : remplace le champ des4 dans *d par *des4
    @ */
-void setDes4(dataCliLibre* d, char *des4);
+void setDes4_dataCliLibre(dataCliLibre* d, char *des4);
 
 
 /* @ requires : *d est valide
    @ assigns : *d
    @ ensures : renvoie l'element contenu dans des4
    @ */
-char* getDes4(dataCliLibre* d);
+char* getDes4_dataCliLibre(dataCliLibre* d);
 
 
 /* @ requires : *d est valide
    @ assigns : *d
    @ ensures : remplace le champ des5 dans *d par *des5
    @ */
-void setDes5(dataCliLibre* d, char *des5);
+void setDes5_dataCliLibre(dataCliLibre* d, char *des5);
 
 
 /* @ requires : *d est valide
    @ assigns : *d
    @ ensures : renvoie l'element contenu dans des5
    @ */
-char* getDes5(dataCliLibre* d);
+char* getDes5_dataCliLibre(dataCliLibre* d);
 
 
 /* @ requires : *d est valide
    @ assigns : *d
    @ ensures : remplace le champ des6 dans *d par *des6
    @ */
-void setDes6(dataCliLibre* d, char *des6);
+void setDes6_dataCliLibre(dataCliLibre* d, char *des6);
 
 
 /* @ requires : *d est valide
    @ assigns : *d
    @ ensures : renvoie l'element contenu dans des6
    @ */
-char* getDes6(dataCliLibre* d);
+char* getDes6_dataCliLibre(dataCliLibre* d);
 
 
 /* @ requires : *d est valide
