@@ -9,6 +9,8 @@ struct croisiere{
   destination **c;
 };
 
-typedef struct croisiere.c croisiere;
+typedef struct croisiere croisiere;
 
-croisiere creer();
+croisiere* creer();
+
+void incrementer( destination d, int n);
