@@ -7,6 +7,8 @@ struct noeud{
   struct noeud * suivant;
 };
 
+typedef struct noeud noeud;
+
 struct file{
   struct noeud* debut;
 };
@@ -22,10 +24,10 @@ void affichage( file *f);
 
 /* Fonction qui permet de créer une file vide */
 
-file creer_file();
+file* creer_file();
 
 
-void ajouter_file(file * f, int identifiant, char * nom, char * prenom, int croisiere);
+void ajouter(file *f ,int i ,char *n, char *p, int c);
 
 
 void affichage( file *f);
