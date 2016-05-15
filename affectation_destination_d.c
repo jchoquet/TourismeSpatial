@@ -11,6 +11,7 @@
 
 void importer_contraintes(contraintes ** contBi, int* nbBi, contraintes ** contUni, int* nbUni);
 void setCrois(croisiere croisTot, croisiere croisDispo, croisiere croisPlan, croisiere croisSat, croisiere croisVie);
+void importer_quotas_libre(croisiere* libre);
 
 void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere croisVie, croisiere croisDispo) {
 
@@ -25,6 +26,8 @@ void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere crois
   int i,j;
 
   /* Calcul des nouveaux quotas */
+  croisiere libre = creer_croisiere();
+  importer_quotas_libre(&croisiere); // On importe toutes les destinations possibles et leur quotas
   
 
   
