@@ -9,7 +9,8 @@
 #include "structure_c.h"
 #include "structure_contraintes.h"
 
-contraintes ** importer_contraintes();
+void importer_contraintes(contraintes ** contBi, int* nbBi, contraintes ** contUni, int* nbUni);
+void setCrois(croisiere croisTot, croisiere croisDispo, croisiere croisPlan, croisiere croisSat, croisiere croisVie);
 
 void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere croisVie, croisiere croisDispo) {
 
@@ -28,13 +29,13 @@ void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere crois
 
   
   /* Creation des structures des contraintes et remplissage */
-  contraintes ** cont = importer_contraintes();
   contraintes ** contUni = NULL;
   contraintes ** contBi = NULL;
-
   int nbContUni = 0;
   int nbContBi = 0;
-  
+
+  importer_contraintes(contUni, &nbContUni, contBi, &nbContBi);
+ 
   
   /* Creation du tableau de structures dataCliLibre et remplissage */
   
@@ -49,7 +50,7 @@ void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere crois
   setCrois(croisTot, croisDispo, croisPlan, croisSat, croisVie); // A voir
   
   
-  char ** destins = malloc(sizeof(char*));
+  char * destins[6]; /* Contiendra les destinations du touriste considere */
   
   /* 1e parcours du tableau : verification des contraintes bidirectionnelles */
   for (i=0; i<n; i++) { // Boucle sur le tableau de dataCliLibre
@@ -70,7 +71,7 @@ void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere crois
       int zoneCont2 = getZone(contBi[j][1]);
       if (destins[zoneCont1] == nomCont1 && destins[zoneCont2] != nomCont2) {
 	/* La contrainte n'est pas respectee */
-	destins[zoneCont1] = NULL;
+	destins[zoneCont1] = NULL; 
       }
       else if (destins[zoneCont2] == nomCont2 && destins[zoneCont1] != nomCont1) {
 	/* La contrainte n'est pas respectee */
@@ -103,18 +104,14 @@ void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere crois
       char * nomCont2 = getNom(contBi[j][1]);
       int zoneCont1 = getZone(contBi[j][0]);
       int zoneCont2 = getZone(contBi[j][1]);
+
       if (destins[zoneCont2] == nomCont2 && destins[zoneCont1] != nomCont1) {
 	/* La contrainte n'est pas respectee */
 	destins[zoneCont1] = nomCont1;
-      }
-    }
-    
-    for (j=0; j<6; j++) {
-      if (destins[j] != NULL) {
 	// Decrementer la structure destination
       }
-      
-    }
+    } 
+    
   }
   
   /* 3e parcours du tableau (ordre decroissant) : annulation des places en trop */
@@ -126,7 +123,41 @@ void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere crois
   }
   
   /* 4e parcours du tableau : remplissage des cases vides par destinations */
-  
+  for (i=0; i<n; i++) { // Boucle sur le tableau de dataCliLibre
+    
+    /* Recuperation des destinations dans un tableau */
+    destins[0] = getDes1_dataCliLibre(&dataTotal[i]);
+    destins[1] = getDes2_dataCliLibre(&dataTotal[i]);
+    destins[2] = getDes3_dataCliLibre(&dataTotal[i]);
+    destins[3] = getDes4_dataCliLibre(&dataTotal[i]);
+    destins[4] = getDes5_dataCliLibre(&dataTotal[i]);
+    destins[5] = getDes6_dataCliLibre(&dataTotal[i]);
+    
+    if (destins[0] == NULL) {
+      /* Remplir ici par la destination de la zone 1 ou il reste le + de places */
+    }
+
+    if (destins[1] == NULL) {
+      /* Remplir ici par la destination de la zone 1 ou il reste le + de places */
+    }
+
+    if (destins[2] == NULL) {
+      /* Remplir ici par la destination de la zone 1 ou il reste le + de places */
+    }
+
+    if (destins[3] == NULL) {
+      /* Remplir ici par la destination de la zone 1 ou il reste le + de places */
+    }
+
+    if (destins[4] == NULL) {
+      /* Remplir ici par la destination de la zone 1 ou il reste le + de places */
+    }
+
+    if (destins[5] == NULL) {
+      /* Remplir ici par la destination de la zone 1 ou il reste le + de places */
+    }
+    
+  }
   
   
   
@@ -135,7 +166,6 @@ void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere crois
   
   
   /* On libere les structures utilisees */
-  free(destins);
   free(dataTotal);
   printf("Done\n");
  
@@ -146,6 +176,11 @@ void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere crois
 
 int main(int argc, char ** argv) {
   
+  if (argc != 2) {
+    printf("ERROR: Usage = nom\n");
+    return 1;
+  }
+
   char * nom = argv[1];
   /*char * prenom = argv[2];
   char * des1 = argv[3];
