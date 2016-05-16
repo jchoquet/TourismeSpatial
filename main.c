@@ -54,11 +54,11 @@ int main{
 
 	/* On transforme la file en une dataCliLibre pour permettre de remonter dans les données */
 
-	dataCliLibre b2 = transf(&b);
+	dataCliLibre* b2 = transf(&b);
 
 	/* On affecte les destinations pour les croisières libres : la dataCliLibre contient les données résultat à exporter en .csv */
 
-	affectationCliLibre(&b2, &c3);	
+	affectationCliLibre(b2, &c3);	
 
 	/* Exportation des dernières données */
 	
