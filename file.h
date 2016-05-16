@@ -1,34 +1,35 @@
 
-struct noeud{
-  int Identifiant;
-  char * Nom;
-  char * Prenom;
-  int Croisiere;
-  struct noeud * suivant;
+struct Noeud{
+  int identifiant;
+  char * nom;
+  char * prenom;
+  int croisiere;
+  struct Noeud * suivant;
 };
 
-typedef struct noeud noeud;
 
-struct file{
-  struct noeud* debut;
+struct File{
+  struct Noeud* debut;
 };
 
-typedef struct file file;
+
+typedef struct File File;
+typedef struct Noeud Noeud;
 
 
-void supprimer_file(file *f);
+void supprimer_file(File *f);
 
-void affichage_file( file *f);
+void affichage_file(File *f);
 
 
 
 /* Fonction qui permet de créer une file vide */
 
-file* creer_file();
+File* creer_file();
 
 
-void ajouter_file(file *f ,int i ,char *n, char *p, int c);
+void ajouter_file(File *f ,int i ,char *n, char *p, int c);
 
 /* Fonction qui fait pointer le dernier de b1 vers le premier de b2 */
 
-void collage_file(file * b1,file * b2);
+void collage_file(File * b1,File * b2);

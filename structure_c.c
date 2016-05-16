@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "structure_c.h"
 
 croisiere* creer_croisiere(){
@@ -44,12 +45,15 @@ void soustraction_struc_c(croisiere * crois1, croisiere crois2) {
   int taille_zone = 0;
   int temp = 0;
 
-  for( int i =0; i < 6; i++)
+  int i = 0;
+  int j = 0;
+
+  for(i =0; i < 6; i++)
   {
 
     taille_zone = crois2.tailles[i];
 
-    for(int j =0; j < taille_zone; j++)
+    for(j =0; j < taille_zone; j++)
     {
 
       temp = crois1->c[i][j].quota;

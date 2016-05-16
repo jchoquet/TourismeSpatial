@@ -3,7 +3,7 @@
 #include <string.h>
 
 #include "fichier.h"
-#include "file.h"
+#include "File.h"
 #include "structure_c.h"
 #include "affectation_destination_c.h"
 
@@ -22,7 +22,7 @@ void reset_tab (char ** * tab, int taille);
 char * set_Destination (croisiere * crois, char * choix_dest, int i);
 	 
 
-void destination_orga (file * b, croisiere * c0, croisiere * c1, croisiere * c2)
+void destination_orga (File * b, croisiere * c0, croisiere * c1, croisiere * c2)
 {
 
 	/* Initialisation des variables temporaires */
@@ -30,7 +30,6 @@ void destination_orga (file * b, croisiere * c0, croisiere * c1, croisiere * c2)
 	int num_croisiere = 0;
 
 	char * choix_dest;
-	int nombre_destinations = 0;
 
 	int id = 0;
 	
@@ -41,23 +40,23 @@ void destination_orga (file * b, croisiere * c0, croisiere * c1, croisiere * c2)
 	char ** tab_res;
 	tab_res = (char **)malloc(sizeof(char*) * 8);
 
-	/* On va parcourir la file contenant l'affectation croisiere des différents voyageurs tant que la croisiere attribuée est organisée */
+	/* On va parcourir la File contenant l'affectation croisiere des différents voyageurs tant que la croisiere attribuée est organisée */
 
-	while (b->croisiere != 3)
+	while (b->debut->croisiere != 3)
 	{
 
 		/* On récupère le numéro = nom de la croisière du client */
 
-		num_croisiere = b->croisiere;
+		num_croisiere = b->debut->croisiere;
 
 		/* On récupère son identifiant */
 
-		id = b->Identifiant;
+		id = b->debut->identifiant;
 
 		/* On écrit le nom et prénom dans le tableau résultat */
 
-		tab_res[0] = b->Nom;
-		tab_res[1] = b->Prenom;
+		tab_res[0] = b->debut->nom;
+		tab_res[1] = b->debut->prenom;
 
 		/* On récupère les 6 destinations associées à ce souhait de croisière du client */
 
@@ -65,7 +64,9 @@ void destination_orga (file * b, croisiere * c0, croisiere * c1, croisiere * c2)
 
 		/* On va maitenant attribuer une destination par zone selon les places dispo et le souhait du client */
 
-		for(int i=0; i < 6; i++)
+		int i =0;
+		
+		for(i=0; i < 6; i++)
 		{
 			/* On récupère la destination voulue par le client pour la zone i */
 
@@ -101,9 +102,9 @@ void destination_orga (file * b, croisiere * c0, croisiere * c1, croisiere * c2)
 		reset_tab(&tab_res, 8);
 		reset_tab(&tab_des, 6);
 
-		/* On supprime le client traité de la file */
+		/* On supprime le client traité de la File */
 
-		supprimer_file(&b);
+		supprimer_file(b);
 	}
 
 	/* On libère les tableaux alloués */
@@ -115,13 +116,16 @@ void destination_orga (file * b, croisiere * c0, croisiere * c1, croisiere * c2)
 char * set_Destination (croisiere * crois, char * choix_dest, int i){
 
 
-	nombre_destinations = crois->tailles[i];
+	int nombre_destinations = crois->tailles[i];
+	char * nom_dest;
+	int quota_dest;
 
-	for(int j =0; j < nombre_destinations; j++)
+	int j = 0;
+	for(j =0; j < nombre_destinations; j++)
 	{
 
 		/* On récupère le nom de la destination */
-		char * nom_dest = get_Name_Desti(*crois, i, j);
+		nom_dest = get_Name_Desti(*crois, i, j);
 
 		/* Si ce nom est celui de la destination souhaitée on regarde le nombre de places restantes */
 		if(strcmp(nom_dest, choix_dest) == 0)
@@ -138,7 +142,7 @@ char * set_Destination (croisiere * crois, char * choix_dest, int i){
 	}
 
 	/* Cas où il n'y avait pas assez de places dans la destination souhaité : on attribue la première disponible */
-	for(int j =0; j < nombre_destinations; j++)
+	for(j =0; j < nombre_destinations; j++)
 	{
 		/* On récupère le nom de la destination */
 		nom_dest = get_Name_Desti(*crois, i, j);
@@ -151,11 +155,14 @@ char * set_Destination (croisiere * crois, char * choix_dest, int i){
 		}
 
 	}
+
+	return "error";
 }
 
 void reset_tab (char ** * tab, int taille)
 {
-	for(int i=0; i < taille; i++)
+	int i =0;
+	for(i=0; i < taille; i++)
 	{
 		*tab[i] = "";
 	}

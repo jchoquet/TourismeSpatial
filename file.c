@@ -1,11 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "hafsa_file.h"
+#include "File.h"
 
 
-/* TO CHANGE : test pas sur taille mais sur != NULL */
 
-int filevide(file *f){
+int filevide(File *f){
   if (f == NULL )
     return 1;
   else
@@ -13,63 +12,72 @@ int filevide(file *f){
 }
 
 
-file* creer_file(void){  
-  file* f = malloc (sizeof(file));
-  f->debut = NULL;
-  return f;
+File * creer_file()
+{
+    File * f = malloc(sizeof(File));
+    f->debut = NULL;
+
+    return f;
 }
 
+void ajouter_File(File *f ,int i ,char *n, char *p, int c){
+  
+  Noeud *new= malloc(sizeof(*new));
 
-void ajouter_file(file *f ,int i ,char *n, char *p, int c){
-  struct noeud *new= malloc(sizeof(*new));
-  if(f==NULL || new==NULL){
+  if(f == NULL || new == NULL){
     exit(EXIT_FAILURE);
+  }
+  new->identifiant=i;
+  new->nom=n;
+  new->prenom=p;
+  new->croisiere=c;
+  new->suivant=NULL;
+
+  if (f->debut != NULL){
+    
+    Noeud *courant = f->debut;
+    while (courant ->suivant != NULL){
+      courant = courant->suivant;
     }
-     new->Identifiant =(int) i;
-     new->Nom= (char*)n;
-     new->Prenom=(char *)p;
-     new->Croisiere=(int )c;
-     new->suivant=NULL;
-    if (f->debut != NULL){
-	noeud *courant = f->debut;
-	while (courant ->suivant != NULL){
-		courant = courant->suivant;
-        }
-	courant->suivant = new;
-    }
-    else{ f->debut = new ; }
+    courant->suivant = new;
+    
+  }
+  else
+  { 
+    f->debut = new ;
+  }
 }
 
 
-void supprimer_file(file *f ){
-  if(f==NULL){
+void supprimer_file(File *f ){
+  if(f == NULL){
      exit(EXIT_FAILURE);
   }
   if(f->debut != NULL){
-    noeud* tmp = f->debut;
+    Noeud * tmp = f->debut;
     f->debut = tmp->suivant;
-    }
+    free(tmp);
+  }
 }
 
 
-void affichage_file( file *f){
-  struct noeud *courant;
+void affichage_File( File *f){
+  struct Noeud *courant;
   courant = f->debut;
   while(courant !=NULL ){     
-     printf("(%d | %s | %s | %d -)->", courant->Identifiant, courant->Nom, courant->Prenom, courant->Croisiere);
+     printf("(%d | %s | %s | %d -)->", courant->identifiant, courant->nom, courant->prenom, courant->croisiere);
      courant=courant->suivant;
      }
   printf ("\n");
 }
 
 
-void collage_file(file * b1,file * b2){
+void collage_File(File * b1,File * b2){
    if (b1->debut != NULL){
-	noeud *courant = b1->debut;
-	while (courant ->suivant != NULL){
-		courant = courant->suivant;
+  Noeud *courant = b1->debut;
+  while (courant->suivant != NULL){
+    courant = courant->suivant;
         }
-	courant->suivant = b2->debut;
+  courant->suivant = b2->debut;
    }
 }
-

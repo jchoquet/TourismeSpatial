@@ -2,11 +2,11 @@
 #include <string.h>
 
 
-//fontion open file "filename"
+/* fontion open file "filename" */
 
 FILE * open_file(const char * filename, const char * mode);
 
-// fonction close file
+/* fonction close file */
 
 int fclose(FILE* filename);
  
