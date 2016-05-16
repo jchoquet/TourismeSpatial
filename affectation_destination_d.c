@@ -4,17 +4,13 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "affectation_destination_d.h"
 #include "structure_d.h"
 #include "structure_c.h"
 #include "structure_contraintes.h"
+#include "affectation_destination_d.h"
 
 /* Fonction necessaires et non encore implementees */
-void importer_contraintes(contraintes ** contBi, int* nbBi, contraintes ** contUni, int* nbUni);
-void setCrois(croisiere croisTot, croisiere croisDispo, croisiere croisPlan, croisiere croisSat, croisiere croisVie);
-void importer_quotas_libre(croisiere* libre);
-
-void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere croisVie, croisiere croisDispo) {
+void affectationCliLibre(dataCliLibre* touriste, croisiere* croisLibre) {
 
   /* On a besoin en entree:
      Tableaux des contraintes => A approvisionner dans le pgm
@@ -25,34 +21,15 @@ void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere crois
   */
   int n = 150; /* Nb touristes */
   int i,j;
-
-  /* Calcul des nouveaux quotas */
-  croisiere libre = creer_croisiere();
-  importer_quotas_libre(&croisiere); // On importe toutes les destinations possibles et leur quotas
-  // A FINIR avec une fonction comme setCrois
-
+  
   
   /* Creation des structures des contraintes et remplissage */
   contraintes ** contUni = NULL;
   contraintes ** contBi = NULL;
   int nbContUni = 0;
   int nbContBi = 0;
-
+  
   importer_contraintes(contUni, &nbContUni, contBi, &nbContBi);
- 
-  
-  /* Creation du tableau de structures dataCliLibre et remplissage */
-  
-  dataCliLibre* dataTotal = calloc(n,sizeof(dataCliLibre));
-  for (i=0; i<n; i=i+1) {
-    dataTotal[i] = *creer_dataCliLibre();
-  }
-  
-  
-  /* Creation du tableau de structures destination et remplissage */
-  croisiere croisTot = creer_croisiere();
-  setCrois(&croisTot, croisDispo, croisPlan, croisSat, croisVie); // A voir
-  
   
   char * destins[6]; /* Contiendra les destinations du touriste considere */
   
@@ -60,13 +37,9 @@ void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere crois
   for (i=0; i<n; i++) { // Boucle sur le tableau de dataCliLibre
     
     /* Recuperation des destinations dans un tableau */
-    destins[0] = getDes1_dataCliLibre(&dataTotal[i]);
-    destins[1] = getDes2_dataCliLibre(&dataTotal[i]);
-    destins[2] = getDes3_dataCliLibre(&dataTotal[i]);
-    destins[3] = getDes4_dataCliLibre(&dataTotal[i]);
-    destins[4] = getDes5_dataCliLibre(&dataTotal[i]);
-    destins[5] = getDes6_dataCliLibre(&dataTotal[i]);
-    
+    for (j=0; j<6; j++) { 
+      destins[j] = getDes_dataCliLibre(&touriste[i],j);
+    }
     
     for (j=0; j<nbContBi; j++) { // Boucle sur les contraintes
       char * nomCont1 = getNom(contBi[j][0]);
@@ -86,7 +59,7 @@ void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere crois
     for (j=0; j<6; j++) {
       if (destins[j] != NULL) {
 	// Decrementer la structure destination pour chaque destination
-	incrementer(libre, destins[j], j+1, -1);
+	incrementer(*croisLibre, destins[j], j+1, -1);
       }
       
     }
@@ -96,12 +69,9 @@ void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere crois
   for (i=0; i<n; i++) { // Boucle sur le tableau de dataCliLibre
     
     /* Recuperation des destinations dans un tableau */
-    destins[0] = getDes1_dataCliLibre(&dataTotal[i]);
-    destins[1] = getDes2_dataCliLibre(&dataTotal[i]);
-    destins[2] = getDes3_dataCliLibre(&dataTotal[i]);
-    destins[3] = getDes4_dataCliLibre(&dataTotal[i]);
-    destins[4] = getDes5_dataCliLibre(&dataTotal[i]);
-    destins[5] = getDes6_dataCliLibre(&dataTotal[i]);
+    for (j=0; j<6; j++) { 
+      destins[j] = getDes_dataCliLibre(&touriste[i],j);
+    }
     
     
     for (j=0; j<nbContUni; j++) {
@@ -109,12 +79,12 @@ void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere crois
       char * nomCont2 = getNom(contBi[j][1]);
       int zoneCont1 = getZone(contBi[j][0]);
       int zoneCont2 = getZone(contBi[j][1]);
-
+      
       if (destins[zoneCont2] == nomCont2 && destins[zoneCont1] != nomCont1) {
 	/* La contrainte n'est pas respectee */
 	destins[zoneCont1] = nomCont1;
 	// Decrementer la structure destination
-	incrementer(libre, destins[j], j+1, -1);
+	incrementer(*croisLibre, destins[j], j+1, -1);
       }
     } 
     
@@ -124,28 +94,37 @@ void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere crois
   /* On regarde le nombre de places au maximum qu'il faut enlever et on fait une boucle a partir de la fin jusqu'a arriver a ce nombre */
   int min = 0;
   for (j=0; j<6; j++) {
-    for (i=0; i<libre.tailles[j]; i++) {
-      if (libre.c[j][i].quotas < min) min = libre.c[j][i].quotas;
+    for (i=0; i<croisLibre->tailles[j]; i++) {
+      if (croisLibre->c[j][i].quota < min) min = croisLibre->c[j][i].quota;
     }
   } 
   /* On enleve les places reservees en trop */
   if (min < 0) {
     for (i=0; i<-min; i++) { // Boucle sur le tableau de dataCliLibre
+      
+      /* Recuperation des destinations dans un tableau */
+      for (j=0; j<6; j++) { 
+	destins[j] = getDes_dataCliLibre(&touriste[i],j);
+      }
+      
+      int quota = 0;
+      
       for (j=0; j<6; j++) {
 	// Regarder si le nombre de places restantes pour cette destination est < 0 et changer si oui
-      
+	quota = get_Quota_by_Name_Desti(*croisLibre,destins[j], j);
+	if (quota < 0) {
+	  setDes_dataCliLibre(&touriste[i],j, NULL);
+	}
+      }
     }
   }
   /* 4e parcours du tableau : remplissage des cases vides par destinations */
   for (i=0; i<n; i++) { // Boucle sur le tableau de dataCliLibre
     
     /* Recuperation des destinations dans un tableau */
-    destins[0] = getDes1_dataCliLibre(&dataTotal[i]);
-    destins[1] = getDes2_dataCliLibre(&dataTotal[i]);
-    destins[2] = getDes3_dataCliLibre(&dataTotal[i]);
-    destins[3] = getDes4_dataCliLibre(&dataTotal[i]);
-    destins[4] = getDes5_dataCliLibre(&dataTotal[i]);
-    destins[5] = getDes6_dataCliLibre(&dataTotal[i]);
+    for (j=0; j<6; j++) { 
+      destins[j] = getDes_dataCliLibre(&touriste[i],j);
+    }
     
     if (destins[0] == NULL) {
       /* Remplir ici par la destination de la zone 1 ou il reste le + de places */
@@ -179,79 +158,9 @@ void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere crois
   
   
   
-  /* On libere les structures utilisees */
-  free(dataTotal);
   printf("Done\n");
  
 }
 
 
 
-void setCrois(croisiere* croisTot, croisiere croisDispo, croisiere croisPlan, croisiere croisSat, croisiere croisVie) {
-  
-  int zone;
-  int i,j;
-  
-  /* Pour chaque zone, on va decrementer le quota de croisTot si la destination correspond */
-  for (zone=0; zone <6; zone++) {
-    /* Pour chaque destination dans croisTot on va decrementer le quota du nombre de places reservee dans les 3 croisieres */
-    for (i=0; i<croisTot->taille[zone]; i++) {
-      for (j=0; j<croisPlan.taille[zone]; j++) {
-	if (croisTot->c[zone][i].nom == croisPlan.c[zone][j].nom) {
-	  croisTot->c[zone][i].quota -= croisPlan.c[zone][j].quota;
-	}
-      }      
-      for (j=0; j<croisSat.taille[zone]; j++) {
-	if (croisTot->c[zone][i].nom == croisSat.c[zone][j].nom) {
-	  croisTot->c[zone][i].quota -= croisSat.c[zone][j].quota;
-	}
-	
-      }      
-      for (j=0; j<croisVie.taille[zone]; j++) {
-	if (croisTot->c[zone][i].nom == croisVie.c[zone][j].nom) {
-	  croisTot->c[zone][i].quota -= croisVie.c[zone][j].quota;
-	}
-	
-      }      
-    }
-  }    
-
-
-}	
-
-int main(int argc, char ** argv) {
-  
-  if (argc != 2) {
-    printf("ERROR: Usage = nom\n");
-    return 1;
-  }
-
-  char * nom = argv[1];
-  /*char * prenom = argv[2];
-  char * des1 = argv[3];
-  char * des2 = argv[4];
-  char * des3 = argv[5];
-  char * des4 = argv[6];
-  char * des5 = argv[7];
-  char * des6 = argv[8];*/
-
-  
-  int n = 150; /* Nb touristes */
-  dataCliLibre* dataTotal = calloc(n,sizeof(dataCliLibre));
-  dataTotal[0] = *creer_dataCliLibre();
-  setNom_dataCliLibre(&dataTotal[0], nom);
-
-  
-  printf("Le nom est %s\n", getNom_dataCliLibre(&dataTotal[0]));
-
-  char * nom2 = argv[2];
-  setNom_dataCliLibre(&dataTotal[0], nom2);
-  printf("Le nom est %s\n", getNom_dataCliLibre(&dataTotal[0]));
-  
-  
-  free(dataTotal);
-  
-  printf("Done\n");
-
-  return 0;
-}

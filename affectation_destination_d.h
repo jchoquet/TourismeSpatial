@@ -5,4 +5,9 @@
 /* Module qui permet d'affecter des destinations pour les touristes ayant choisi une croisiere libre */
 
 
-void affectationCliLibre();
+void importer_contraintes(contraintes ** contBi, int* nbBi, contraintes ** contUni, int* nbUni);
+void setCrois(croisiere croisTot, croisiere croisDispo, croisiere croisPlan, croisiere croisSat, croisiere croisVie);
+void importer_quotas_libre(croisiere* libre);
+
+void affectationCliLibre(dataCliLibre* touriste, croisiere* croisLibre);
+

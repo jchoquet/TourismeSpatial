@@ -10,10 +10,24 @@ test.o : test.c structure_d.h
 test_structure_d : test.o structure_d.o
 	gcc -Wall -Wextra -ansi $^ -o $@
 
+
+structure_c.o : structure_c.c structure_c.h
+	gcc -Wall -Wextra -c $<
+
+test_struct_c.o : test_struct_c.c structure_c.h
+	gcc -Wall -Wextra -c $<
+
+test_struct_c : test_struct_c.o structure_c.o
+	gcc -Wall -Wextra -ansi $^ -o $@
+
+
 affectation_destination_d.o : affectation_destination_d.c affectation_destination_d.h
 	gcc -Wall -Wextra -c $<
 
-test_destination_d : affectation_destination_d.o structure_d.o
+test_affect_d.o : test_affect_d.c
+	gcc -Wall -Wextra -c $<
+
+test_destination_d : test_affect_d.o affectation_destination_d.o structure_d.o
 	gcc -Wall -Wextra -ansi $^ -o $@
 
 file.o : file.c file.h
