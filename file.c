@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "file.h"
+#include "hafsa_file.h"
 
 
+/* TO CHANGE : test pas sur taille mais sur != NULL */
 
 int filevide(file *f){
   if (f == NULL )
@@ -19,7 +20,7 @@ file* creer_file(void){
 }
 
 
-void ajouter_file(file *f ,int i ,char *n, char *p, int c){
+void ajouter(file *f ,int i ,char *n, char *p, int c){
   struct noeud *new= malloc(sizeof(*new));
   if(f==NULL || new==NULL){
     exit(EXIT_FAILURE);
@@ -40,7 +41,7 @@ void ajouter_file(file *f ,int i ,char *n, char *p, int c){
 }
 
 
-void supprimer_file(file *f ){
+void supprimer(file *f ){
   if(f==NULL){
      exit(EXIT_FAILURE);
   }
@@ -51,10 +52,10 @@ void supprimer_file(file *f ){
 }
 
 
-void affichage_file( file *f){
+void affichage( file *f){
   struct noeud *courant;
   courant = f->debut;
-  while(f !=NULL ){     
+  while(courant !=NULL ){     
      printf("(%d | %s | %s | %d -)->", courant->Identifiant, courant->Nom, courant->Prenom, courant->Croisiere);
      courant=courant->suivant;
      }
@@ -72,6 +73,3 @@ void collage_file(file * b1,file * b2){
    }
 }
 
-int main(){
-return 0;
-}

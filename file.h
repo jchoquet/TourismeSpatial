@@ -16,7 +16,10 @@ struct file{
 typedef struct file file;
 
 
-void supprimer_file(file *f);
+void supprimer(file *f);
+
+void affichage( file *f);
+
 
 
 /* Fonction qui permet de créer une file vide */
@@ -24,10 +27,10 @@ void supprimer_file(file *f);
 file* creer_file();
 
 
-void ajouter_file(file *f ,int i ,char *n, char *p, int c);
+void ajouter(file *f ,int i ,char *n, char *p, int c);
 
 
-void affichage_file( file *f);
+void affichage( file *f);
 /* Fonction qui fait pointer le dernier de b1 vers le premier de b2 */
 
 void collage_file(file * b1,file * b2);
