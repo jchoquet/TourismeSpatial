@@ -54,86 +54,16 @@ char* getPrenom_dataCliLibre(dataCliLibre* d);
 
 /* @ requires : *d est valide
    @ assigns : *d
-   @ ensures : remplace le champ des1 dans *d par *des1
+   @ ensures : remplace la destination de la zone zone dans d* par *des
    @ */
-void setDes1_dataCliLibre(dataCliLibre* d, char *des1);
+void setDes_dataCliLibre(dataCliLibre* d, int zone, char *des);
 
 
 /* @ requires : *d est valide
    @ assigns : *d
    @ ensures : renvoie l'element contenu dans des1
    @ */
-char* getDes1_dataCliLibre(dataCliLibre* d);
-
-
-/* @ requires : *d est valide
-   @ assigns : *d
-   @ ensures : remplace le champ des2 dans *d par *des2
-   @ */
-void setDes2_dataCliLibre(dataCliLibre* d, char *des2);
-
-
-/* @ requires : *d est valide
-   @ assigns : *d
-   @ ensures : renvoie l'element contenu dans des2
-   @ */
-char* getDes2_dataCliLibre(dataCliLibre* d);
-
-
-/* @ requires : *d est valide
-   @ assigns : *d
-   @ ensures : remplace le champ des3 dans *d par *des3
-   @ */
-void setDes3_dataCliLibre(dataCliLibre* d, char *des3);
-
-
-/* @ requires : *d est valide
-   @ assigns : *d
-   @ ensures : renvoie l'element contenu dans des3
-   @ */
-char* getDes3_dataCliLibre(dataCliLibre* d);
-
-
-/* @ requires : *d est valide
-   @ assigns : *d
-   @ ensures : remplace le champ des4 dans *d par *des4
-   @ */
-void setDes4_dataCliLibre(dataCliLibre* d, char *des4);
-
-
-/* @ requires : *d est valide
-   @ assigns : *d
-   @ ensures : renvoie l'element contenu dans des4
-   @ */
-char* getDes4_dataCliLibre(dataCliLibre* d);
-
-
-/* @ requires : *d est valide
-   @ assigns : *d
-   @ ensures : remplace le champ des5 dans *d par *des5
-   @ */
-void setDes5_dataCliLibre(dataCliLibre* d, char *des5);
-
-
-/* @ requires : *d est valide
-   @ assigns : *d
-   @ ensures : renvoie l'element contenu dans des5
-   @ */
-char* getDes5_dataCliLibre(dataCliLibre* d);
-
-
-/* @ requires : *d est valide
-   @ assigns : *d
-   @ ensures : remplace le champ des6 dans *d par *des6
-   @ */
-void setDes6_dataCliLibre(dataCliLibre* d, char *des6);
-
-
-/* @ requires : *d est valide
-   @ assigns : *d
-   @ ensures : renvoie l'element contenu dans des6
-   @ */
-char* getDes6_dataCliLibre(dataCliLibre* d);
+  char* getDes_dataCliLibre(struct dataCliLibre* d, int zone);
 
 
 /* @ requires : *d est valide

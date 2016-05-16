@@ -66,10 +66,16 @@ char* getPrenom_dataCliLibre(struct dataCliLibre* d) {
 
 /* @ requires : *d est valide
    @ assigns : *d
-   @ ensures : remplace le champ des1 dans *d par *des1
+   @ ensures : remplace la destination de la zone zone dans d* par *des
    @ */
-void setDes1_dataCliLibre(dataCliLibre* d, char *des1){
-  d->des1 = des1;
+void setDes_dataCliLibre(dataCliLibre* d, int zone, char *des){
+  
+  if (zone == 0) d->des1 = des;
+  else if (zone == 1) d->des2 = des;
+  else if (zone == 2) d->des3 = des;
+  else if (zone == 3) d->des4 = des;
+  else if (zone == 4) d->des5 = des;
+  else return d->des6 = des;
 }
 
 
@@ -77,98 +83,13 @@ void setDes1_dataCliLibre(dataCliLibre* d, char *des1){
    @ assigns : *d
    @ ensures : renvoie l'element contenu dans des1
    @ */
-char* getDes1_dataCliLibre(struct dataCliLibre* d) {
-  return d->des1;
-}
-
-
-/* @ requires : *d est valide
-   @ assigns : *d
-   @ ensures : remplace le champ des2 dans *d par *des2
-   @ */
-void setDes2_dataCliLibre(dataCliLibre* d, char *des2){
-  d->des2 = des2;
-}
-
-
-/* @ requires : *d est valide
-   @ assigns : *d
-   @ ensures : renvoie l'element contenu dans des2
-   @ */
-char* getDes2_dataCliLibre(struct dataCliLibre* d) {
-  return d->des2;
-}
-
-
-/* @ requires : *d est valide
-   @ assigns : *d
-   @ ensures : remplace le champ des3 dans *d par *des3
-   @ */
-void setDes3_dataCliLibre(dataCliLibre* d, char *des3){
-  d->des3 = des3;
-}
-
-
-/* @ requires : *d est valide
-   @ assigns : *d
-   @ ensures : renvoie l'element contenu dans des3
-   @ */
-char* getDes3_dataCliLibre(struct dataCliLibre* d) {
-  return d->des3;
-}
-
-
-/* @ requires : *d est valide
-   @ assigns : *d
-   @ ensures : remplace le champ des4 dans *d par *des4
-   @ */
-void setDes4_dataCliLibre(dataCliLibre* d, char *des4){
-  d->des4 = des4;
-}
-
-
-/* @ requires : *d est valide
-   @ assigns : *d
-   @ ensures : renvoie l'element contenu dans des4
-   @ */
-char* getDes4_dataCliLibre(struct dataCliLibre* d) {
-  return d->des4;
-}
-
-
-/* @ requires : *d est valide
-   @ assigns : *d
-   @ ensures : remplace le champ des5 dans *d par *des5
-   @ */
-void setDes5_dataCliLibre(dataCliLibre* d, char *des5){
-  d->des5 = des5;
-}
-
-
-/* @ requires : *d est valide
-   @ assigns : *d
-   @ ensures : renvoie l'element contenu dans des5
-   @ */
-char* getDes5_dataCliLibre(struct dataCliLibre* d) {
-  return d->des5;
-}
-
-
-/* @ requires : *d est valide
-   @ assigns : *d
-   @ ensures : remplace le champ des6 dans *d par *des6
-   @ */
-void setDes6_dataCliLibre(dataCliLibre* d, char *des6){
-  d->des6 = des6;
-}
-
-
-/* @ requires : *d est valide
-   @ assigns : *d
-   @ ensures : renvoie l'element contenu dans des6
-   @ */
-char* getDes6_dataCliLibre(struct dataCliLibre* d) {
-  return d->des6;
+char* getDes_dataCliLibre(struct dataCliLibre* d, int zone) {
+  if (zone == 0) return d->des1;
+  else if (zone == 1) return d->des2;
+  else if (zone == 2) return d->des3;
+  else if (zone == 3) return d->des4;
+  else if (zone == 4) return d->des5;
+  else return d->des6;
 }
 
 
