@@ -28,7 +28,7 @@ void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere crois
   /* Calcul des nouveaux quotas */
   croisiere libre = creer_croisiere();
   importer_quotas_libre(&croisiere); // On importe toutes les destinations possibles et leur quotas
-  
+  // A FINIR avec une fonction comme setCrois
 
   
   /* Creation des structures des contraintes et remplissage */
@@ -85,6 +85,7 @@ void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere crois
     for (j=0; j<6; j++) {
       if (destins[j] != NULL) {
 	// Decrementer la structure destination pour chaque destination
+	incrementer(libre, destins[j], j+1, -1);
       }
       
     }
@@ -112,6 +113,7 @@ void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere crois
 	/* La contrainte n'est pas respectee */
 	destins[zoneCont1] = nomCont1;
 	// Decrementer la structure destination
+	incrementer(libre, destins[j], j+1, -1);
       }
     } 
     
@@ -119,12 +121,20 @@ void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere crois
   
   /* 3e parcours du tableau (ordre decroissant) : annulation des places en trop */
   /* On regarde le nombre de places au maximum qu'il faut enlever et on fait une boucle a partir de la fin jusqu'a arriver a ce nombre */
-
-  for (i=n-1; i>=0; i--) { // Boucle sur le tableau de dataCliLibre
-    
-    
+  int min = 0;
+  for (j=0; j<6; j++) {
+    for (i=0; i<libre.tailles[j]; i++) {
+      if (libre.c[j][i].quotas < min) min = libre.c[j][i].quotas;
+    }
+  } 
+  /* On enleve les places reservees en trop */
+  if (min < 0) {
+    for (i=0; i<-min; i++) { // Boucle sur le tableau de dataCliLibre
+      for (j=0; j<6; j++) {
+	// Regarder si le nombre de places restantes pour cette destination est < 0 et changer si oui
+      
+    }
   }
-  
   /* 4e parcours du tableau : remplissage des cases vides par destinations */
   for (i=0; i<n; i++) { // Boucle sur le tableau de dataCliLibre
     
