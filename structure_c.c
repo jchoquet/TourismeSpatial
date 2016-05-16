@@ -37,3 +37,28 @@ void moins_Quota_Desti(croisiere crois, int i, int j) {
     }
 }
 
+/* On soustrait les quotas de la croisière 2 à ceux de la croisière 1 */
+
+void soustraction_struc_c(croisiere * crois1, croisiere crois2) {
+
+  int taille_zone = 0;
+  int temp = 0;
+
+  for( int i =0; i < 6; i++)
+  {
+
+    taille_zone = crois2.tailles[i];
+
+    for(int j =0; j < taille_zone; j++)
+    {
+
+      temp = crois1->c[i][j].quota;
+      temp = temp - crois2.c[i][j].quota;
+
+      crois1->c[i][j].quota = temp;
+      
+    }
+
+  }
+
+}

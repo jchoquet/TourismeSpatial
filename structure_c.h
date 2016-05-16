@@ -19,13 +19,22 @@ croisiere * creer_croisiere();
 
 void incrementer(croisiere c, char * dest, int zone, int n);
 
+
+char * get_Name_Desti(croisiere crois, int i, int j);
+int get_Quota_Desti(croisiere crois, int i, int j);
+void moins_Quota_Desti(croisiere crois, int i, int j);
+
+
 /* A coder please : Fonctions qui créent les structures c0, c1 et c2 */
 
 void get_c0(croisiere * c);
 void get_c1(croisiere * c);
 void get_c2(croisiere * c);
 
+/* Fonction qui cree la structure croisiere pour la croisiere libre et qui enleve pour chaque destination le nombre de places indiquees dans les structures c0, c1 et c2 */
 
-char * get_Name_Desti(croisiere crois, int i, int j);
-int get_Quota_Desti(croisiere crois, int i, int j);
-void moins_Quota_Desti(croisiere crois, int i, int j);
+void get_c3(croisiere * c3, croisiere c0, croisiere c1, croisiere c2);
+
+/* On soustrait les quotas de la croisière 2 à ceux de la croisière 1 */
+
+void soustraction_struc_c(croisiere * crois1, croisiere crois2);
