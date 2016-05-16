@@ -16,13 +16,13 @@ affectation_destination_d.o : affectation_destination_d.c affectation_destinatio
 test_destination_d : affectation_destination_d.o structure_d.o
 	gcc -Wall -Wextra -ansi $^ -o $@
 
-file.o : file.c file.h
+hafsa_file.o : hafsa_file.c hafsa_file.h
 	gcc -Wall -Wextra -c $<
 
-file.o : test_file.c test_file.h
+test_file.o : test_file.c
 	gcc -Wall -Wextra -c $<
 
-test_file : test_file.o file.o
+test_file : test_file.o hafsa_file.o
 	gcc -Wall -Wextra -ansi $^ -o $@
 
 fichierbis.o : fichierbis.c 
