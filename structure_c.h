@@ -26,4 +26,3 @@ void get_c2(croisiere * c);
 
 void incrementer(croisiere c, char * dest, int zone, int n);
 
-
