@@ -16,10 +16,7 @@ struct file{
 typedef struct file file;
 
 
-void supprimer(file *f);
-
-void affichage( file *f);
-
+void supprimer_file(file *f);
 
 
 /* Fonction qui permet de créer une file vide */
