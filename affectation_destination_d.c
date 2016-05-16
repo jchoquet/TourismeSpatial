@@ -9,6 +9,7 @@
 #include "structure_c.h"
 #include "structure_contraintes.h"
 
+/* Fonction necessaires et non encore implementees */
 void importer_contraintes(contraintes ** contBi, int* nbBi, contraintes ** contUni, int* nbUni);
 void setCrois(croisiere croisTot, croisiere croisDispo, croisiere croisPlan, croisiere croisSat, croisiere croisVie);
 void importer_quotas_libre(croisiere* libre);
@@ -50,7 +51,7 @@ void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere crois
   
   /* Creation du tableau de structures destination et remplissage */
   croisiere croisTot = creer_croisiere();
-  setCrois(croisTot, croisDispo, croisPlan, croisSat, croisVie); // A voir
+  setCrois(&croisTot, croisDispo, croisPlan, croisSat, croisVie); // A voir
   
   
   char * destins[6]; /* Contiendra les destinations du touriste considere */
@@ -186,6 +187,37 @@ void affectationCliLibre(croisiere croisPlan, croisiere croisSat,croisiere crois
 
 
 
+void setCrois(croisiere* croisTot, croisiere croisDispo, croisiere croisPlan, croisiere croisSat, croisiere croisVie) {
+  
+  int zone;
+  int i,j;
+  
+  /* Pour chaque zone, on va decrementer le quota de croisTot si la destination correspond */
+  for (zone=0; zone <6; zone++) {
+    /* Pour chaque destination dans croisTot on va decrementer le quota du nombre de places reservee dans les 3 croisieres */
+    for (i=0; i<croisTot->taille[zone]; i++) {
+      for (j=0; j<croisPlan.taille[zone]; j++) {
+	if (croisTot->c[zone][i].nom == croisPlan.c[zone][j].nom) {
+	  croisTot->c[zone][i].quota -= croisPlan.c[zone][j].quota;
+	}
+      }      
+      for (j=0; j<croisSat.taille[zone]; j++) {
+	if (croisTot->c[zone][i].nom == croisSat.c[zone][j].nom) {
+	  croisTot->c[zone][i].quota -= croisSat.c[zone][j].quota;
+	}
+	
+      }      
+      for (j=0; j<croisVie.taille[zone]; j++) {
+	if (croisTot->c[zone][i].nom == croisVie.c[zone][j].nom) {
+	  croisTot->c[zone][i].quota -= croisVie.c[zone][j].quota;
+	}
+	
+      }      
+    }
+  }    
+
+
+}	
 
 int main(int argc, char ** argv) {
   
