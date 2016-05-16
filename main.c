@@ -43,11 +43,22 @@ int main{
 	soustraction_struct_c(c1m, *c1);
 	soustraction_struct_c(c2m, *c2);
 
-	/* On crée la structure c3 et on la remplit */
+	/* On crée la structure c3 qui est la croisiere associée aux croisières libres et on la remplit */
 
 	croisiere * c3 = creer_croisiere();
 	get(c3,c0m,c1m,c2m);
 
+	/* On transforme la file en une dataCliLibre pour permettre de remonter dans les données */
+
+	dataCliLibre b2 = transf(&b);
+
+	/* On affecte les destinations pour les croisières libres : la dataCliLibre contient les données résultat à exporter en .csv */
+
+	affectationCliLibre(&b2, &c3, c0m,c1m, c2m);	
+
+	/* Exportation des dernières données */
+	
+	export(b2);
 
 	return 0;
 }
