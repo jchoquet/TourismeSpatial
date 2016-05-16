@@ -19,6 +19,21 @@ void incrementer(croisiere crois, char * dest, int zone, int n) {
   }
 }
 
+char * get_Name_Desti(croisiere crois, int i, int j) {
+    return crois.c[i][j].nom;
+}
 
 
+int get_Quota_Desti(croisiere crois, int i, int j) {
+  return crois.c[i][j].quota ;
+}
+
+
+void moins_Quota_Desti(croisiere crois, int i, int j) {
+    int temp = crois.c[i][j].quota;
+    if (temp != 0)
+    {
+      crois.c[i][j].quota = temp - 1;
+    }
+}
 

@@ -13,10 +13,11 @@ struct croisiere {
 
 typedef struct croisiere croisiere;
 
-/* Fonction qui crée une instance c vide */
+/* Fonction qui crée une instance de croisiere vide */
 
 croisiere * creer_croisiere();
 
+void incrementer(croisiere c, char * dest, int zone, int n);
 
 /* A coder please : Fonctions qui créent les structures c0, c1 et c2 */
 
@@ -24,5 +25,7 @@ void get_c0(croisiere * c);
 void get_c1(croisiere * c);
 void get_c2(croisiere * c);
 
-void incrementer(croisiere c, char * dest, int zone, int n);
 
+char * get_Name_Desti(croisiere crois, int i, int j);
+int get_Quota_Desti(croisiere crois, int i, int j);
+void moins_Quota_Desti(croisiere crois, int i, int j);
