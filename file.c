@@ -20,7 +20,7 @@ file* creer_file(void){
 }
 
 
-void ajouter(file *f ,int i ,char *n, char *p, int c){
+void ajouter_file(file *f ,int i ,char *n, char *p, int c){
   struct noeud *new= malloc(sizeof(*new));
   if(f==NULL || new==NULL){
     exit(EXIT_FAILURE);
@@ -41,7 +41,7 @@ void ajouter(file *f ,int i ,char *n, char *p, int c){
 }
 
 
-void supprimer(file *f ){
+void supprimer_file(file *f ){
   if(f==NULL){
      exit(EXIT_FAILURE);
   }
@@ -52,7 +52,7 @@ void supprimer(file *f ){
 }
 
 
-void affichage( file *f){
+void affichage_file( file *f){
   struct noeud *courant;
   courant = f->debut;
   while(courant !=NULL ){     

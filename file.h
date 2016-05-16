@@ -16,9 +16,9 @@ struct file{
 typedef struct file file;
 
 
-void supprimer(file *f);
+void supprimer_file(file *f);
 
-void affichage( file *f);
+void affichage_file( file *f);
 
 
 
@@ -27,10 +27,8 @@ void affichage( file *f);
 file* creer_file();
 
 
-void ajouter(file *f ,int i ,char *n, char *p, int c);
+void ajouter_file(file *f ,int i ,char *n, char *p, int c);
 
-
-void affichage( file *f);
 /* Fonction qui fait pointer le dernier de b1 vers le premier de b2 */
 
 void collage_file(file * b1,file * b2);

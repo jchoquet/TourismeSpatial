@@ -17,3 +17,7 @@ int importer_souh_voy(const char * filename);
 int importer_contr(const char * filename);
 
 int importer_dest(const char * filename)
+
+/* Fonction qui retorune un tableau contenant [Nom, Prenom, souhait1, souhait2 ] */
+
+char ** get_Infos_by_ID(int identifiant);
