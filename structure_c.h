@@ -7,7 +7,7 @@ typedef struct destination destination;
  
  
 struct croisiere {
-  destination **c; /* Tableau de 6 lignes (nombre de zones) et 2 colonnes (2 destinations par zone), tableau de destinations */
+  destination ** c; /* Tableau de 6 lignes (nombre de zones) et 2 colonnes (2 destinations par zone), tableau de destinations */
   int tailles[6]; /* Tableau de 6 cases contenant le nb de destinations dans la zone */
 };
 
@@ -31,9 +31,10 @@ void get_c0(croisiere * c);
 void get_c1(croisiere * c);
 void get_c2(croisiere * c);
 
-/* Fonction qui cree la structure croisiere pour la croisiere libre et qui enleve pour chaque destination le nombre de places indiquees dans les structures c0, c1 et c2 */
+/* Fonction qui cree la structure croisiere pour la croisiere libre et l'autre qui enleve pour chaque destination le nombre de places indiquees dans les structures c0, c1 et c2 */
 
-void get_c3(croisiere * c3, croisiere c0, croisiere c1, croisiere c2);
+void get_c3(croisiere * c3);
+void soustract(croisiere * c3, croisiere c0, croisiere c1, croisiere c2);
 
 /* On soustrait les quotas de la croisière 2 à ceux de la croisière 1 */
 

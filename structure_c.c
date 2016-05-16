@@ -5,7 +5,7 @@
 
 croisiere* creer_croisiere(){
   croisiere* new = malloc(sizeof(croisiere));
-  new->c = NULL;
+  new->c = malloc(6*sizeof(destination*));
   return new;
 }
 
@@ -13,8 +13,8 @@ void incrementer(croisiere crois, char * dest, int zone, int n) {
   int i;
 
   for (i=0; i<crois.tailles[zone]; i++) {
-    if (crois.c[zone-1][i].nom == dest) {
-      crois.c[zone-1][i].quota = crois.c[zone-1][i].quota + n;
+    if (crois.c[zone][i].nom == dest) {
+      crois.c[zone][i].quota += n;
       return;
     }
   }
@@ -64,5 +64,25 @@ void soustraction_struc_c(croisiere * crois1, croisiere crois2) {
     }
 
   }
+
+}
+
+
+void soustract(croisiere * c3, croisiere c0, croisiere c1, croisiere c2) {
+int zone = 0;
+	int j;	
+
+	for (zone=0; zone <6; zone++) {
+    	/* Pour chaque destination dans c3 on va decrementer le quota du nombre de places reservees dans c0, c1 et c2 */
+      		for (j=0; j<c0.tailles[zone]; j++) {
+			incrementer(*c3, c0.c[zone][j].nom, zone, -c0.c[zone][j].quota);
+      		}   
+		for (j=0; j<c1.tailles[zone]; j++) {
+			incrementer(*c3, c1.c[zone][j].nom, zone, -c1.c[zone][j].quota);
+      		} 	
+		for (j=0; j<c2.tailles[zone]; j++) {
+			incrementer(*c3, c2.c[zone][j].nom, zone, -c2.c[zone][j].quota);
+      		} 
+	}
 
 }
