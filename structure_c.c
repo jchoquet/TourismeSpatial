@@ -29,6 +29,15 @@ int get_Quota_Desti(croisiere crois, int i, int j) {
   return crois.c[i][j].quota ;
 }
 
+int get_Quota_by_Name_Desti(croisiere crois, char * nom, int zone) {
+  int i;
+  for (i=0; i<crois.tailles[zone]; i++) {
+     if (crois.c[zone][i].nom == nom) {
+        return crois.c[zone][i].quota;
+     }
+  }
+  return -1;
+}
 
 void moins_Quota_Desti(croisiere crois, int i, int j) {
     int temp = crois.c[i][j].quota;

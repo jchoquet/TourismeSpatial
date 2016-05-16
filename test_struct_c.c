@@ -130,7 +130,7 @@ int main () {
   printf("Nouveau quota destination 2,1 : %i\n",get_Quota_Desti(*crois, 2, 1));
 
   
-  printf("Quota destination Lune : %i\n",get_Quota_Desti(*crois, 5, 1));
+  printf("Quota destination Lune : %i\n",get_Quota_by_Name_Desti(*crois, "Lune",5));
   incrementer(*crois, "Lune", 5, 10);
   printf("Nouveau quota destination Lune : %i\n",get_Quota_Desti(*crois, 5, 1));
 

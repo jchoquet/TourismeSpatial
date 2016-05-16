@@ -22,6 +22,7 @@ void incrementer(croisiere c, char * dest, int zone, int n);
 
 char * get_Name_Desti(croisiere crois, int i, int j);
 int get_Quota_Desti(croisiere crois, int i, int j);
+int get_Quota_by_Name_Desti(croisiere crois, char * nom, int zone);
 void moins_Quota_Desti(croisiere crois, int i, int j);
 
 
