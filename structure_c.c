@@ -60,7 +60,7 @@ char * get_Max_Quota(croisiere * crois, int zone) {
    }
 
    /* On décrémente le quota du max de quota car on réserve la place */
-   crois->c[zone][i].quota -= 1;
+   crois->c[zone][imax].quota -= 1;
    return crois->c[zone][i].nom;
 }
 
