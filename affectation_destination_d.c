@@ -34,14 +34,14 @@ void affectationCliLibre(dataCliLibre* touriste, croisiere* croisLibre) {
   char * destins[6]; /* Contiendra les destinations du touriste considere */
   
   /* 1e parcours du tableau : verification des contraintes bidirectionnelles */
-  for (i=0; i<n; i++) { // Boucle sur le tableau de dataCliLibre
+  for (i=0; i<n; i++) { /* Boucle sur le tableau de dataCliLibre */
     
     /* Recuperation des destinations dans un tableau */
     for (j=0; j<6; j++) { 
       destins[j] = getDes_dataCliLibre(&touriste[i],j);
     }
     
-    for (j=0; j<nbContBi; j++) { // Boucle sur les contraintes
+    for (j=0; j<nbContBi; j++) { /* Boucle sur les contraintes */
       char * nomCont1 = getNom(contBi[j][0]);
       char * nomCont2 = getNom(contBi[j][1]);
       int zoneCont1 = getZone(contBi[j][0]);
@@ -58,7 +58,7 @@ void affectationCliLibre(dataCliLibre* touriste, croisiere* croisLibre) {
     
     for (j=0; j<6; j++) {
       if (destins[j] != NULL) {
-	// Decrementer la structure destination pour chaque destination
+	/* Decrementer la structure destination pour chaque destination */
 	incrementer(*croisLibre, destins[j], j+1, -1);
       }
       
@@ -66,7 +66,7 @@ void affectationCliLibre(dataCliLibre* touriste, croisiere* croisLibre) {
   }
   
   /* 2e parcours du tableau : verification des contraintes unidirectionnelles */
-  for (i=0; i<n; i++) { // Boucle sur le tableau de dataCliLibre
+  for (i=0; i<n; i++) { /* Boucle sur le tableau de dataCliLibre */
     
     /* Recuperation des destinations dans un tableau */
     for (j=0; j<6; j++) { 
@@ -83,7 +83,7 @@ void affectationCliLibre(dataCliLibre* touriste, croisiere* croisLibre) {
       if (destins[zoneCont2] == nomCont2 && destins[zoneCont1] != nomCont1) {
 	/* La contrainte n'est pas respectee */
 	destins[zoneCont1] = nomCont1;
-	// Decrementer la structure destination
+	/* Decrementer la structure destination */
 	incrementer(*croisLibre, destins[j], j+1, -1);
       }
     } 
@@ -100,7 +100,7 @@ void affectationCliLibre(dataCliLibre* touriste, croisiere* croisLibre) {
   } 
   /* On enleve les places reservees en trop */
   if (min < 0) {
-    for (i=0; i<-min; i++) { // Boucle sur le tableau de dataCliLibre
+    for (i=0; i<-min; i++) { /* Boucle sur le tableau de dataCliLibre */
       
       /* Recuperation des destinations dans un tableau */
       for (j=0; j<6; j++) { 
@@ -110,7 +110,7 @@ void affectationCliLibre(dataCliLibre* touriste, croisiere* croisLibre) {
       int quota = 0;
       
       for (j=0; j<6; j++) {
-	// Regarder si le nombre de places restantes pour cette destination est < 0 et changer si oui
+	/* Regarder si le nombre de places restantes pour cette destination est < 0 et changer si oui */
 	quota = get_Quota_by_Name_Desti(*croisLibre,destins[j], j);
 	if (quota < 0) {
 	  setDes_dataCliLibre(&touriste[i],j, NULL);
@@ -119,44 +119,18 @@ void affectationCliLibre(dataCliLibre* touriste, croisiere* croisLibre) {
     }
   }
   /* 4e parcours du tableau : remplissage des cases vides par destinations */
-  for (i=0; i<n; i++) { // Boucle sur le tableau de dataCliLibre
+  for (i=0; i<n; i++) { /* Boucle sur le tableau de dataCliLibre */
     
     /* Recuperation des destinations dans un tableau */
     for (j=0; j<6; j++) { 
       destins[j] = getDes_dataCliLibre(&touriste[i],j);
-    }
-    
-    if (destins[0] == NULL) {
-      /* Remplir ici par la destination de la zone 1 ou il reste le + de places */
-    }
-
-    if (destins[1] == NULL) {
-      /* Remplir ici par la destination de la zone 1 ou il reste le + de places */
-    }
-
-    if (destins[2] == NULL) {
-      /* Remplir ici par la destination de la zone 1 ou il reste le + de places */
-    }
-
-    if (destins[3] == NULL) {
-      /* Remplir ici par la destination de la zone 1 ou il reste le + de places */
-    }
-
-    if (destins[4] == NULL) {
-      /* Remplir ici par la destination de la zone 1 ou il reste le + de places */
-    }
-
-    if (destins[5] == NULL) {
-      /* Remplir ici par la destination de la zone 1 ou il reste le + de places */
-    }
-    
+      
+      /* Si la destination est NULL, on remplace par la destination de la meme zone ou il reste le + de places */
+      if (destins[j] == NULL) {
+	setDes_dataCliLibre(&touriste[i],j, get_Max_Quota(croisLibre, j));
+      }
+    }   
   }
-  
-  
-  
-  /* Exportation sous le format .csv */
-  
-  
   
   printf("Done\n");
  

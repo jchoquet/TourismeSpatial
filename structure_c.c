@@ -47,6 +47,24 @@ void moins_Quota_Desti(croisiere crois, int i, int j) {
     }
 }
 
+
+char * get_Max_Quota(croisiere * crois, int zone) {
+   int i;
+   int max = 0;
+   int imax = 0;
+   for (i=0; i<crois->tailles[zone]; i++) {
+      if (crois->c[zone][i].quota > max) {
+         max = crois->c[zone][i].quota;
+         imax = i;
+      }
+   }
+
+   /* On décrémente le quota du max de quota car on réserve la place */
+   crois->c[zone][i].quota -= 1;
+   return crois->c[zone][i].nom;
+}
+
+
 /* On soustrait les quotas de la croisière 2 à ceux de la croisière 1 */
 
 void soustraction_struc_c(croisiere * crois1, croisiere crois2) {
