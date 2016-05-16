@@ -8,10 +8,13 @@ croisiere* creer(){
   return new;
 }
 
-void incrementer(destination d, int n){
-  d.quota = d.quota + n;
-}
+void incrementer(croisiere crois, char * dest, int zone, int n) {
+  int i;
 
-int main(){
-return 0;
+  for (i=0; i<crois.tailles[zone]; i++) {
+    if (crois.c[zone-1][i].nom == dest) {
+      crois.c[zone-1][i].quota = crois.c[zone-1][i].quota + n;
+      return;
+    }
+  }
 }
